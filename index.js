@@ -1,14 +1,14 @@
 const express = require("express");
 const PORT = process.env.PORT || 4000;
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 const connectDB = require("./config/db");
 
 //connect to database
 connectDB();
 
 //enable cors
-app.use(cors());
+// app.use(cors());
 
 //enable json
 app.use(express.json({ extended: true }));

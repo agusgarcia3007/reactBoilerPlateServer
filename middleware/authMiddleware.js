@@ -1,0 +1,19 @@
+const jwt = require("jsonwebtoken");
+
+module.exports = function (req, res, next) {
+  //check header token
+  const token = req.header("x-auth-token");
+  console.log(`ping token`);
+
+  if (!token) return res.status(400).json({ msg: "token error" });
+
+  //token validation
+  try {
+    const verified = jwt.verify(token, process.env.SECRET);
+    req.user = verified.user;
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ msg: "unauthorized" });
+  }
+};
